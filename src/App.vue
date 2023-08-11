@@ -1,30 +1,28 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts" setup>
+import axios from "axios";
+
+const test = () => {
+  axios
+    .get("/api/gateway?k=8433057", {
+      headers: {
+        "X-Host": "mall.film-ticket.city.list",
+      },
+    })
+    .then((response) => {
+      console.log("response", response);
+    });
+};
+
+function test3000() {
+  axios.get("/custom/test").then((response) => {
+    console.log("response", response);
+  });
+}
 </script>
 
 <template>
   <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <button @click="test">测试</button>
+    <button @click="test3000">测试 3000</button>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>

@@ -1,21 +1,63 @@
 <script lang="ts" setup>
 import axios from "axios";
 
-const test = () => {
-  axios
-    .get("/api/gateway?k=8433057", {
-      headers: {
-        "X-Host": "mall.film-ticket.city.list",
-      },
-    })
-    .then((response) => {
-      console.log("response", response);
-    });
-};
+interface ICity {
+  cityId: number;
+  isHot: number;
+  name: string;
+  pinyin: string;
+}
 
-function test3000() {
-  axios.get("/custom/test").then((response) => {
+interface IResp {
+  status: number;
+  msg: string;
+  data: {
+    cities: ICity[];
+  };
+}
+
+interface IFilm {
+  filmId: number;
+  name: string;
+  poster: string;
+}
+
+interface IRespFilms {
+  status: number;
+  msg: string;
+  data: {
+    total: number;
+    films: IFilm[];
+  };
+}
+
+function test() {
+  // axios<string>({}).then((response) => {
+  //   response.data;
+  // });
+
+  axios<IResp>("/api/gateway", {
+    headers: {
+      "x-host": "mall.film-ticket.city.list",
+    },
+  }).then((response) => {
+    console.log(response.data.msg);
+  });
+
+  axios<IRespFilms>("/api/gateway", {
+    params: {
+      cityId: 440300,
+      pageNum: 1,
+      pageSize: 10,
+      type: 1,
+    },
+    headers: {
+      "x-host": "mall.film-ticket.film.list",
+    },
+  }).then((response) => {
     console.log("response", response);
+    response.data.data.total;
+    response.data.data.films[0].filmId;
   });
 }
 </script>
@@ -23,6 +65,5 @@ function test3000() {
 <template>
   <div>
     <button @click="test">测试</button>
-    <button @click="test3000">测试 3000</button>
   </div>
 </template>

@@ -24,14 +24,21 @@
 
 <script lang="ts" setup>
 // 要使用 store ,就引入相关 store 的组合式函数调用接口，调用返回值就是该store的实例对象
-import { useApp } from "@/stores/app";
-import { useCounter } from "@/stores/counter";
+// import { useApp } from "@/stores/app";
+// import { useCounter } from "@/stores/counter";
+
+// import { useApp, useCounter } from "@/stores";
+
+import { useStore } from "@/hooks/store";
+
 import HelloWorld from "./components/HelloWorld.vue";
 import HelloState from "./components/HelloState.vue";
 import HelloChange from "./components/HelloChange.vue";
 import HelloAPI from "./components/HelloAPI.vue";
 
-const app = useApp();
-const counter = useCounter();
+// const app = useApp();
+// const counter = useCounter();
+
+const { app, counter } = useStore();
 console.log("app", app);
 </script>

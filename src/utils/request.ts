@@ -40,22 +40,14 @@ request.interceptors.response.use(
  * 导出一个 httpGet
  * @param apiCode X-HOST 需要的值
  * @param params  请求参数
- * @param config  请求配置
  * @returns
  */
-export function httpGet(
-  apiCode: string,
-  params?: any,
-  config?: AxiosRequestConfig
-) {
-  // 将 config.headers 这个对象中 增加 X-HOST
+export function httpGet<T = any>(apiCode: string, params?: any) {
   const headers = {
-    ...config?.headers,
     "X-Host": apiCode,
   };
 
-  return request({
-    ...config,
+  return request<T, T>({
     url: `/gateway?${apiCode}`,
     method: "GET",
     params,
@@ -70,7 +62,7 @@ export function httpGet(
  * @param config  请求配置
  * @returns
  */
-export function httpPost(
+export function httpPost<T = any>(
   apiCode: string,
   data?: any,
   config?: AxiosRequestConfig
@@ -81,7 +73,7 @@ export function httpPost(
     "X-Host": apiCode,
   };
 
-  return request({
+  return request<T, T>({
     ...config,
     url: `/gateway?${apiCode}`,
     method: "POST",

@@ -34,6 +34,7 @@ const keyword = ref("");
             v-for="item in group.groupList"
             :key="item.cityId"
             :title="item.name"
+            @click="city.changeCity(item)"
           />
         </template>
       </van-index-bar>

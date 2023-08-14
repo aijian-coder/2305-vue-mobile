@@ -5,6 +5,8 @@ import { getCityList } from "@/api/city";
 export const useCity = defineStore("city", {
   state: () => ({
     cities: [] as API.ICity[],
+    // 当前选择的城市对象
+    curCity: null as API.ICity | null,
   }),
 
   getters: {
@@ -37,6 +39,9 @@ export const useCity = defineStore("city", {
     indexList(): string[] {
       return (this.cityGroup as any).map((item: any) => item.groupName);
     },
+    curCityId(state) {
+      return state.curCity?.cityId;
+    },
   },
 
   actions: {
@@ -57,6 +62,13 @@ export const useCity = defineStore("city", {
         // 将 resp.cities 做一个本地存储
         store2.set("cities", resp.cities);
       });
+    },
+
+    /**
+     * 修改当前城市
+     */
+    changeCity(payload: API.ICity) {
+      this.curCity = payload;
     },
   },
 });

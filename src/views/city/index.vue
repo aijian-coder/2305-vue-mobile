@@ -1,16 +1,28 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import { useStore } from "@/hooks/store";
 
-const { city } = useStore();
+const { cityStore } = useStore();
+const router = useRouter(); // useRouter() 返回的就是 路由器实例对象
 
 onMounted(() => {
-  city.getCities();
+  cityStore.getCities();
 });
 
 function onClickLeft() {
   console.log("onClickLeft");
-  city.getCities();
+  cityStore.getCities();
+}
+
+/**
+ * 城市点击
+ */
+function handleClick(city: API.ICity) {
+  // 1. 将当前点击的写入store
+  cityStore.changeCity(city);
+  // 2. 跳转页面
+  router.replace({ name: "films" });
 }
 
 const keyword = ref("");
@@ -27,14 +39,14 @@ const keyword = ref("");
     <van-search v-model="keyword" placeholder="请输入搜索关键词" />
 
     <div class="body">
-      <van-index-bar :index-list="city.indexList">
-        <template v-for="group in city.cityGroup" :key="group.groupName">
+      <van-index-bar :index-list="cityStore.indexList">
+        <template v-for="group in cityStore.cityGroup" :key="group.groupName">
           <van-index-anchor :index="group.groupName" />
           <van-cell
             v-for="item in group.groupList"
             :key="item.cityId"
             :title="item.name"
-            @click="city.changeCity(item)"
+            @click="handleClick(item)"
           />
         </template>
       </van-index-bar>

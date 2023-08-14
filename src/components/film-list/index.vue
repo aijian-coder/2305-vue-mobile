@@ -1,15 +1,20 @@
 <script lang="ts" setup>
 import { reactive } from "vue";
 import { getFilmList } from "@/api/film";
+import { useStore } from "@/hooks/store";
 import FilmItem from "../film-item/index.vue";
+
+const { cityStore } = useStore();
 
 const props = defineProps<{
   type: 1 | 2;
 }>();
 
+const emit = defineEmits(["scroll"]);
+
 // 请求接口的参数
 const params = reactive({
-  cityId: 440300,
+  cityId: cityStore.curCityId,
   pageNum: 1,
   pageSize: 10,
   type: props.type,
@@ -46,10 +51,16 @@ const onLoad = () => {
       // state.finished = true;
     });
 };
+
+// 滚动事件处理
+const handleScroll = (event: Event) => {
+  // 触发一个 scroll 的自定义事件，通知父组件
+  emit("scroll", event);
+};
 </script>
 
 <template>
-  <div class="film-list">
+  <div class="film-list" @scroll.passive="handleScroll">
     <van-list
       v-model:loading="state.loading"
       :finished="state.finished"

@@ -1,7 +1,7 @@
-import { useCity } from "@/stores/city";
+import { useCityStore } from "@/stores/city";
 
 export function useStore() {
   return {
-    city: useCity(),
+    cityStore: useCityStore(),
   };
 }

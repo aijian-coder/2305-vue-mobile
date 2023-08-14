@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useStore } from "@/hooks/store";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -14,6 +15,13 @@ const router = createRouter({
           path: "films",
           name: "films",
           component: () => import("@/views/film/film-list/index.vue"),
+          beforeEnter: (to, from) => {
+            // 判断是否选择了城市
+            const { cityStore } = useStore();
+            if (!cityStore.curCityId) {
+              return { name: "city" };
+            }
+          },
         },
         {
           path: "cinemas",

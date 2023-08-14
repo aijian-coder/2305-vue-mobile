@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import store2 from "store2";
 import { getCityList } from "@/api/city";
 
-export const useCity = defineStore("city", {
+export const useCityStore = defineStore("city", {
   state: () => ({
     cities: [] as API.ICity[],
     // 当前选择的城市对象
@@ -70,5 +70,9 @@ export const useCity = defineStore("city", {
     changeCity(payload: API.ICity) {
       this.curCity = payload;
     },
+  },
+
+  persist: {
+    paths: ["curCity"],
   },
 });

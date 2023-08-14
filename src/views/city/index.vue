@@ -27,7 +27,7 @@ const keyword = ref("");
     <van-search v-model="keyword" placeholder="请输入搜索关键词" />
 
     <div class="body">
-      <van-index-bar>
+      <van-index-bar :index-list="city.indexList">
         <template v-for="group in city.cityGroup" :key="group.groupName">
           <van-index-anchor :index="group.groupName" />
           <van-cell

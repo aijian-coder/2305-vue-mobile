@@ -34,6 +34,9 @@ export const useCity = defineStore("city", {
       // 返回 result
       return result.sort((a, b) => (a.groupName > b.groupName ? 1 : -1));
     },
+    indexList(): string[] {
+      return (this.cityGroup as any).map((item: any) => item.groupName);
+    },
   },
 
   actions: {

@@ -3,12 +3,16 @@ import { reactive } from "vue";
 import { getFilmList } from "@/api/film";
 import FilmItem from "../film-item/index.vue";
 
+const props = defineProps<{
+  type: 1 | 2;
+}>();
+
 // 请求接口的参数
 const params = reactive({
   cityId: 440300,
   pageNum: 1,
-  pageSize: 30,
-  type: 1,
+  pageSize: 10,
+  type: props.type,
 });
 
 const state = reactive({

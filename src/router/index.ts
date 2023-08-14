@@ -45,6 +45,12 @@ const router = createRouter({
       name: "city",
       component: () => import("@/views/city/index.vue"),
     },
+    {
+      // :xxx? => ?号表示该动态参数是可选的
+      path: "/cinema/:cinemaId/film/:filmId?/:show?",
+      name: "cinema-info",
+      component: () => import("@/views/cinema/cinema-info/index.vue"),
+    },
   ],
 });
 

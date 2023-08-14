@@ -11,12 +11,7 @@ defineOptions({
       <RouterView />
     </div>
     <div class="page-home__footer">
-      <van-tabbar
-        route
-        active-color="#ff5f16"
-        inactive-color="#797d82"
-        :fixed="false"
-      >
+      <van-tabbar route inactive-color="#797d82" :fixed="false">
         <van-tabbar-item to="/films" icon="home-o">电影</van-tabbar-item>
         <van-tabbar-item to="/cinemas" icon="search">影院</van-tabbar-item>
         <van-tabbar-item to="/posts" icon="friends-o">资讯</van-tabbar-item>

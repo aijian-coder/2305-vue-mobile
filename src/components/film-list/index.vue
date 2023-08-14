@@ -24,9 +24,11 @@ const state = reactive({
   // 列表数据
   list: [] as API.IFilm[],
   // 数据总条数
-  total: 0,
+  total: 1,
   // 当前是否正在请求中
   loading: false,
+  // 当前请求是否出错了
+  error: false,
   // 是否已加载完成，加载完成后不再触发 load 事件
   finished: false,
 });
@@ -41,6 +43,9 @@ const onLoad = () => {
       state.total = resp.total;
       // 修改 params.pageNum
       params.pageNum++;
+    })
+    .catch(() => {
+      state.error = true;
     })
     .finally(() => {
       // 不管接口成功还是失败，
@@ -61,10 +66,18 @@ const handleScroll = (event: Event) => {
 
 <template>
   <div class="film-list" @scroll.passive="handleScroll">
+    <!-- 
+      v-model:loading="state.loading"
+        :loading="state.loading"   @update:loading="state.loading = $event"
+      v-model:error="state.error"
+        :error="state.error"       @update:error="state.error = $event"
+     -->
     <van-list
       v-model:loading="state.loading"
+      v-model:error="state.error"
       :finished="state.finished"
       :offset="10"
+      error-text="请求失败，点击重新加载"
       finished-text="没有更多了"
       @load="onLoad"
     >

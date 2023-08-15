@@ -50,4 +50,23 @@ declare namespace API {
     films: IFilm[];
     total: number;
   }
+
+  export interface ICinemaService {
+    name: string;
+    description: string;
+  }
+
+  // 影院类型
+  export interface ICinema {
+    cinemaId: number;
+    name: string;
+    cityId: number;
+    cityName: string;
+    districtId: number;
+    districtName: string;
+    address: string;
+    phone: string;
+    services: ICinemaService[];
+    // ...
+  }
 }

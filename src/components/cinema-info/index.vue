@@ -1,16 +1,22 @@
+<script lang="ts" setup>
+defineProps<{
+  info: API.ICinema;
+}>();
+</script>
+
 <template>
   <div class="cinema-info">
-    <div class="cinema-title">深圳传奇影城后瑞店</div>
+    <div class="cinema-title">{{ info.name }}</div>
     <div class="cinema-tags">
-      <van-tag>儿童票</van-tag>
-      <van-tag>停车</van-tag>
-      <van-tag>3D眼镜</van-tag>
+      <van-tag v-for="(tag, index) in info.services" :key="index">
+        {{ tag.name }}
+      </van-tag>
     </div>
     <div class="cinema-address">
       <div class="address">
-        <span>深圳宝安区后瑞地铁站B出口100米处（壹航城购物中心T2栋2楼）</span>
+        <span>{{ info.address }}</span>
       </div>
-      <a class="tell" href="tel:0755-23082193">
+      <a class="tell" :href="`tel:${info.phone}`">
         <van-icon name="phone-o" />
       </a>
     </div>

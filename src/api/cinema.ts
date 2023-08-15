@@ -20,3 +20,22 @@ export function getCinemaFilms(cinemaId: string) {
     }
   );
 }
+
+/**
+ * 获取排期列表
+ */
+export function getScheduleList(
+  cinemaId: string,
+  filmId: string,
+  date: string
+) {
+  return httpGet<{ schedules: API.ISchedule[] }>(
+    "mall.film-ticket.schedule.list",
+    {
+      cinemaId,
+      filmId,
+      date,
+      k: new Date().getTime(),
+    }
+  );
+}

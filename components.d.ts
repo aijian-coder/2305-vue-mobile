@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     CinemaFilmBanner: typeof import('./src/components/cinema-film-banner/index.vue')['default']
+    CinemaFilmSchedules: typeof import('./src/components/cinema-film-schedules/index.vue')['default']
     CinemaInfo: typeof import('./src/components/cinema-info/index.vue')['default']
     FilmItem: typeof import('./src/components/film-item/index.vue')['default']
     FilmList: typeof import('./src/components/film-list/index.vue')['default']

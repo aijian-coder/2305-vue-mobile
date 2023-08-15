@@ -5,6 +5,12 @@ import "swiper/css/bundle";
 
 const props = defineProps<{
   films: API.IFilm[];
+  filmId: string;
+}>();
+
+const emit = defineEmits<{
+  changeFilmId: [payload: string];
+  changeDate: [payload: string];
 }>();
 
 // swiper 容器
@@ -23,12 +29,28 @@ onMounted(() => {
     slideToClickedSlide: true,
   });
 
+  // 判断 props.filmId 是否存在
+  if (props.filmId) {
+    // 基于 props.filmId 到 props.films 中寻找对应的下标
+    const index = props.films.findIndex(
+      (item) => item.filmId === +props.filmId
+    );
+    // 使用 mySwiper 的 slideTo() 切换到 index 这个
+    mySwiper.slideTo(index);
+  }
+
+  // 默认通知一次父组件，filmId 是什么, date 是什么
+  emit("changeFilmId", "" + props.films[mySwiper.activeIndex].filmId);
+  emit("changeDate", "" + props.films[mySwiper.activeIndex].showDate[0]);
+
   mySwiper.on("slideChange", function () {
+    console.log("slideChange");
     // 修改 curIndex
     curIndex.value = mySwiper.activeIndex;
 
-    // console.log("切换了", mySwiper.activeIndex);
-    // console.log(props.films[mySwiper.activeIndex]);
+    // 通知父组件，filmId 切换了 date 切换了
+    emit("changeFilmId", "" + props.films[mySwiper.activeIndex].filmId);
+    emit("changeDate", "" + props.films[mySwiper.activeIndex].showDate[0]);
   });
 });
 </script>

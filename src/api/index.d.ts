@@ -43,6 +43,7 @@ declare namespace API {
     synopsis: string;
     timeType: number;
     videoId: string;
+    showDate: number[];
   }
 
   // 电影列表接口返回值类型
@@ -68,5 +69,15 @@ declare namespace API {
     phone: string;
     services: ICinemaService[];
     // ...
+  }
+
+  // 排期对象类型
+  export interface ISchedule {
+    scheduleId: number;
+    filmLanguage: string;
+    imagery: string;
+    showAt: number;
+    endAt: number;
+    salePrice: number;
   }
 }

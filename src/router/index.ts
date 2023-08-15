@@ -32,6 +32,9 @@ const router = createRouter({
           path: "posts",
           name: "posts",
           component: () => import("@/views/posts/index.vue"),
+          meta: {
+            needLogin: true,
+          },
         },
         {
           path: "center",
@@ -57,6 +60,14 @@ const router = createRouter({
       component: () => import("@/views/login/index.vue"),
     },
   ],
+});
+
+router.beforeEach((to) => {
+  const { userStore } = useStore();
+
+  if (to.meta.needLogin && !userStore.token) {
+    return { name: "login", query: { redirect: to.fullPath } };
+  }
 });
 
 export default router;

@@ -51,6 +51,11 @@ const router = createRouter({
       name: "cinema-info",
       component: () => import("@/views/cinema/cinema-info/index.vue"),
     },
+    {
+      path: "/login",
+      name: "login",
+      component: () => import("@/views/login/index.vue"),
+    },
   ],
 });
 

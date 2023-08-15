@@ -3,6 +3,7 @@
  */
 
 import axios from "axios";
+import { showToast } from "vant";
 import type { AxiosRequestConfig } from "axios";
 
 // 创建一个 axios 实例
@@ -25,7 +26,7 @@ request.interceptors.response.use(
     // 做业务状态码的判断
     if (resp.status !== 0) {
       // 弹窗提示
-      alert(resp.msg);
+      showToast(resp.msg);
       return Promise.reject(resp);
     } else {
       return resp.data;

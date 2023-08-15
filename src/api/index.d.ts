@@ -80,4 +80,20 @@ declare namespace API {
     endAt: number;
     salePrice: number;
   }
+
+  // 登录接口返回类型
+  export interface ILoginResp {
+    accountName: string;
+    birthday: string;
+    gender: number;
+    headIcon: string;
+    isRegiest: number;
+    mail: string;
+    mobile: string;
+    nickName: string;
+    operatorId: number;
+    platformType: number;
+    token: string;
+    userId: number;
+  }
 }

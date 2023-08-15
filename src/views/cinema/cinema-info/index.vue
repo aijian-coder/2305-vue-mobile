@@ -89,7 +89,11 @@ onMounted(() => {
         @change-date="hanldeChangeDate"
       />
 
-      <CinemaFilmSchedules :schedules="schedules" :show-date="showDate" />
+      <CinemaFilmSchedules
+        :schedules="schedules"
+        :show-date="showDate"
+        @change-date="hanldeChangeDate"
+      />
     </template>
   </div>
 </template>

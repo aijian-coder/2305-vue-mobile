@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vant/touch-emulator": "^1.4.0",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
     "normalize.css": "^8.0.1",

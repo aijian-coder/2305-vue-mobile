@@ -1,10 +1,23 @@
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "@/hooks/store";
 
 const { cityStore } = useStore();
 const router = useRouter(); // useRouter() 返回的就是 路由器实例对象
+
+/**
+ * 根据输入框，计算搜索的城市
+ */
+const searchCompute = computed(() => {
+  return cityStore.cities.filter((city) => {
+    if (!keyword.value) return;
+    return (
+      //根据拼音和文字，做模糊检索
+      city.pinyin.includes(keyword.value) || city.name.includes(keyword.value)
+    );
+  });
+});
 
 onMounted(() => {
   cityStore.getCities();
@@ -38,7 +51,17 @@ const keyword = ref("");
 
     <van-search v-model="keyword" placeholder="请输入搜索关键词" />
 
-    <div class="body">
+    <div class="body" v-show="searchCompute.length">
+      <van-index-bar :index-list="[]">
+        <van-cell
+          v-for="item in searchCompute"
+          :key="item.cityId"
+          :title="item.name"
+          @click="handleClick(item)"
+        />
+      </van-index-bar>
+    </div>
+    <div class="body" v-show="!searchCompute.length">
       <van-index-bar :index-list="cityStore.indexList">
         <template v-for="group in cityStore.cityGroup" :key="group.groupName">
           <van-index-anchor :index="group.groupName" />

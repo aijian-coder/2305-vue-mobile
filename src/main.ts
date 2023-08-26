@@ -1,3 +1,6 @@
+// 引入模块后自动生效
+import "@vant/touch-emulator";
+
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
